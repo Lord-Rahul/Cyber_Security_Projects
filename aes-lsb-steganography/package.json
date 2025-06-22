@@ -1,10 +1,10 @@
 {
-  "name": "aes-lsb-steganography",
+ "name": "aes-lsb-steganography",
   "version": "1.0.0",
-  "description": "A web application for AES-LSB image steganography to securely hide and extract text messages within image files.",
   "main": "src/app.js",
   "scripts": {
     "start": "node src/app.js",
+    "dev": "nodemon src/app.js",
     "test": "jest"
   },
   "dependencies": {
