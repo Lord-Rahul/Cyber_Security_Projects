@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AES-LSB Image Steganography</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-brand">Steganography App</a>
+            <ul class="nav-links">
+                <li><a href="/"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="/encode"><i class="fas fa-lock"></i> Encode</a></li>
+                <li><a href="/decode"><i class="fas fa-unlock"></i> Decode</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1><i class="fas fa-shield-alt"></i> AES-LSB Image Steganography</h1>
+        
+        <div class="flex-container">
+            <div class="flex-item">
+                <div class="form-container">
+                    <h2><i class="fas fa-lock"></i> Encode Message</h2>
+                    <p>Hide your secret message in an image using AES encryption.</p>
+                    <form action="/encode" method="POST" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="image">Cover Image:</label>
+                            <div class="file-upload">
+                                <label for="image" class="file-upload-label">
+                                    <i class="fas fa-upload"></i> Choose a PNG image
+                                </label>
+                                <input type="file" name="image" id="image" accept="image/png" required>
+                            </div>
+                            <div id="image-preview" class="preview-container"></div>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Secret Message:</label>
+                            <textarea name="message" id="message" placeholder="Enter your secret message here..." required></textarea>
+                            <div class="char-counter">0 characters</div>
+                        </div>
+                        
+                        <!-- Redesigned secret key section -->
+                        <div class="form-group">
+                            <label for="key">Secret Key:</label>
+                            <div class="key-input-container">
+                                <input type="password" name="key" id="key" placeholder="Enter 16 digit secret key" 
+                                       minlength="8" required autocomplete="off">
+                                <button type="button" class="toggle-password">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                            <div class="key-strength-meter">
+                                <div class="key-strength-fill"></div>
+                            </div>
+                            <div class="key-strength-text">Key strength: Too short</div>
+                            <div class="key-hint">Use a mix of letters, numbers & symbols for best security</div>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn"><i class="fas fa-lock"></i> Encode Message</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="flex-item">
+                <div class="form-container">
+                    <h2><i class="fas fa-unlock"></i> Decode Message</h2>
+                    <p>Extract hidden messages from steganographic images.</p>
+                    <form action="/decode" method="POST" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label for="stegoImage">Stego Image:</label>
+                            <div class="file-upload">
+                                <label for="stegoImage" class="file-upload-label">
+                                    <i class="fas fa-upload"></i> Choose a stego image
+                                </label>
+                                <input type="file" name="stegoImage" id="stegoImage" accept="image/png" required>
+                            </div>
+                            <div id="stego-preview" class="preview-container"></div>
+                        </div>
+                        
+                        <!-- Redesigned secret key section for decode -->
+                        <div class="form-group">
+                            <label for="decodeKey">Secret Key:</label>
+                            <div class="key-input-container">
+                                <input type="password" name="key" id="decodeKey" 
+                                       placeholder="Enter the same key used for encoding" required>
+                                <button type="button" class="toggle-password">
+                                    <i class="fas fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <button type="submit" class="submit-btn"><i class="fas fa-unlock"></i> Decode Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>

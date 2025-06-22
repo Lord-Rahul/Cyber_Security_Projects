@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decode Message</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-brand">Steganography App</a>
+            <ul class="nav-links">
+                <li><a href="/"><i class="fas fa-home"></i> Home</a></li>
+                <li><a href="/encode"><i class="fas fa-lock"></i> Encode</a></li>
+                <li><a href="/decode"><i class="fas fa-unlock"></i> Decode</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1><i class="fas fa-unlock"></i> Decode Message from Image</h1>
+        
+        <div class="form-container">
+            <form action="/decode" method="POST" enctype="multipart/form-data">
+                <div class="form-group">
+                    <label for="stegoImage">Upload Stego Image:</label>
+                    <div class="file-upload">
+                        <label for="stegoImage" class="file-upload-label">
+                            <i class="fas fa-upload"></i> Choose a stego image
+                        </label>
+                        <input type="file" name="stegoImage" id="stegoImage" accept="image/*" required>
+                    </div>
+                    <div id="stego-preview" class="preview-container"></div>
+                </div>
+                <div class="form-group">
+                    <label for="key">
+                        <i class="fas fa-key"></i> Enter Secret Key:
+                    </label>
+                    <div class="key-input-container">
+                        <input type="password" name="key" id="key" class="key-input" 
+                               placeholder="Enter the secret key used for encryption..." required 
+                               autocomplete="off">
+                        <button type="button" class="toggle-password" aria-label="Toggle password visibility">
+                            <i class="fas fa-eye"></i>
+                        </button>
+                    </div>
+                    <small class="key-hint">Enter the exact key that was used to encrypt the message</small>
+                </div>
+                <button type="submit"><i class="fas fa-unlock"></i> Decode Message</button>
+            </form>
+        </div>
+
+        <% if (typeof error !== 'undefined' && error) { %>
+            <div class="error-container">
+                <div class="error-message">
+                    <i class="fas fa-exclamation-triangle"></i> <%= error %>
+                </div>
+            </div>
+        <% } %>
+        
+        <% if (message) { %>
+            <div class="message-container">
+                <h2><i class="fas fa-comment-dots"></i> Decoded Message:</h2>
+                <div class="message-box">
+                    <%= message %>
+                </div>
+            </div>
+        <% } %>
+    </div>
+
+    <script src="/js/main.js"></script>
+</body>
+</html>
